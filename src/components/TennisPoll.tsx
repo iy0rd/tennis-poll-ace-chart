@@ -4,7 +4,7 @@ import VoteForm from "@/components/VoteForm";
 import ResultsChart from "@/components/ResultsChart";
 import PollCard from "@/components/PollCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, ChartBar } from "lucide-react";
+import { Poll, ChartBar } from "lucide-react";
 
 // This would normally come from a database, but we'll simulate it locally
 const initialVotes = {
@@ -46,7 +46,7 @@ const TennisPoll = () => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid grid-cols-2 mb-6">
           <TabsTrigger value="vote" className="flex items-center gap-2">
-            <CheckCircle className="h-4 w-4" />
+            <Poll className="h-4 w-4" />
             Cast Your Vote
           </TabsTrigger>
           <TabsTrigger value="results" className="flex items-center gap-2">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { tennisPlayers } from "@/data/tennisPlayers";
 import PlayerCard from "@/components/PlayerCard";
-import { CheckCircle } from "lucide-react";
+import { Poll } from "lucide-react";
 
 interface VoteFormProps {
   onVoteSubmit: (playerId: string) => void;
@@ -52,7 +52,7 @@ const VoteForm = ({ onVoteSubmit, isVoting }: VoteFormProps) => {
         disabled={!selectedPlayer || isVoting}
         className="w-full bg-tennis-blue hover:bg-tennis-blue/80 text-white py-6 rounded-lg mt-4 transition-all"
       >
-        <CheckCircle className="mr-2 h-5 w-5" />
+        <Poll className="mr-2 h-5 w-5" />
         {isVoting ? "Submitting..." : "Submit Vote"}
       </Button>
     </form>
