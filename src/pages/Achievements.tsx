@@ -1,73 +1,18 @@
 
 import React, { useState } from 'react';
 import { 
-  Table, 
-  TableHeader, 
-  TableBody, 
-  TableHead, 
-  TableRow, 
-  TableCell 
-} from "@/components/ui/table";
-import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardContent 
-} from "@/components/ui/card";
-import { 
   Tabs, 
   TabsContent, 
   TabsList, 
   TabsTrigger 
 } from "@/components/ui/tabs";
 import { tennisPlayers } from "@/data/tennisPlayers";
+import { playerStats } from "@/data/playerStats";
 import { Trophy, Award, Medal } from "lucide-react";
-
-// Updated career stats data based on Ultimate Tennis Statistics
-const playerStats = {
-  "federer": {
-    hardCourtWins: 783,
-    clayCourtWins: 223,
-    grassCourtWins: 192,
-    totalWins: 1251,
-    olympicMedals: 1,
-    tourFinals: 6,
-    yearEndRanking: [6, 13, 6, 2, 1, 1, 1, 1, 1, 2, 3, 3, 2, 2, 3, 16, 3],
-    matchWinRate: 82.1,
-    hardCourtTitles: 71,
-    clayCourtTitles: 11,
-    grassCourtTitles: 19,
-    masters1000: 28
-  },
-  "nadal": {
-    hardCourtWins: 519,
-    clayCourtWins: 474,
-    grassCourtWins: 78,
-    totalWins: 1076,
-    olympicMedals: 2,
-    tourFinals: 0,
-    yearEndRanking: [47, 2, 2, 2, 1, 2, 1, 2, 1, 3, 5, 9, 1, 2, 2, 6, 9],
-    matchWinRate: 83.2,
-    hardCourtTitles: 25,
-    clayCourtTitles: 63,
-    grassCourtTitles: 4,
-    masters1000: 36
-  },
-  "djokovic": {
-    hardCourtWins: 700,
-    clayCourtWins: 268,
-    grassCourtWins: 121,
-    totalWins: 1094,
-    olympicMedals: 1,
-    tourFinals: 7,
-    yearEndRanking: [83, 16, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 12, 1, 1, 1, 1],
-    matchWinRate: 83.4,
-    hardCourtTitles: 69,
-    clayCourtTitles: 18,
-    grassCourtTitles: 8,
-    masters1000: 40
-  }
-};
+import MajorTitlesTab from '@/components/achievements/MajorTitlesTab';
+import SurfaceWinsTab from '@/components/achievements/SurfaceWinsTab';
+import TitlesBreakdownTab from '@/components/achievements/TitlesBreakdownTab';
+import CareerStatsTab from '@/components/achievements/CareerStatsTab';
 
 const Achievements = () => {
   const [activeTab, setActiveTab] = useState("general");
@@ -105,133 +50,19 @@ const Achievements = () => {
           </TabsList>
           
           <TabsContent value="general">
-            <Card>
-              <CardHeader>
-                <CardTitle>Grand Slam & Major Tournament Victories</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Player</TableHead>
-                      <TableHead>Grand Slams</TableHead>
-                      <TableHead>Tour Finals</TableHead>
-                      <TableHead>Olympic Medals</TableHead>
-                      <TableHead>Total Career Titles</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {tennisPlayers.map((player) => (
-                      <TableRow key={player.id}>
-                        <TableCell className="font-medium">{player.fullName}</TableCell>
-                        <TableCell>{player.grandSlams}</TableCell>
-                        <TableCell>{playerStats[player.id].tourFinals}</TableCell>
-                        <TableCell>{playerStats[player.id].olympicMedals}</TableCell>
-                        <TableCell>{player.careerTitles}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <MajorTitlesTab tennisPlayers={tennisPlayers} playerStats={playerStats} />
           </TabsContent>
           
           <TabsContent value="surfaces">
-            <Card>
-              <CardHeader>
-                <CardTitle>Match Wins by Playing Surface</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Player</TableHead>
-                      <TableHead>Hard Court Wins</TableHead>
-                      <TableHead>Clay Court Wins</TableHead>
-                      <TableHead>Grass Court Wins</TableHead>
-                      <TableHead>Total Wins</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {tennisPlayers.map((player) => (
-                      <TableRow key={player.id}>
-                        <TableCell className="font-medium">{player.fullName}</TableCell>
-                        <TableCell>{playerStats[player.id].hardCourtWins}</TableCell>
-                        <TableCell>{playerStats[player.id].clayCourtWins}</TableCell>
-                        <TableCell>{playerStats[player.id].grassCourtWins}</TableCell>
-                        <TableCell>{playerStats[player.id].totalWins}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <SurfaceWinsTab tennisPlayers={tennisPlayers} playerStats={playerStats} />
           </TabsContent>
           
           <TabsContent value="titles">
-            <Card>
-              <CardHeader>
-                <CardTitle>Titles by Surface & Category</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Player</TableHead>
-                      <TableHead>Hard Court Titles</TableHead>
-                      <TableHead>Clay Court Titles</TableHead>
-                      <TableHead>Grass Court Titles</TableHead>
-                      <TableHead>Masters 1000</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {tennisPlayers.map((player) => (
-                      <TableRow key={player.id}>
-                        <TableCell className="font-medium">{player.fullName}</TableCell>
-                        <TableCell>{playerStats[player.id].hardCourtTitles}</TableCell>
-                        <TableCell>{playerStats[player.id].clayCourtTitles}</TableCell>
-                        <TableCell>{playerStats[player.id].grassCourtTitles}</TableCell>
-                        <TableCell>{playerStats[player.id].masters1000}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <TitlesBreakdownTab tennisPlayers={tennisPlayers} playerStats={playerStats} />
           </TabsContent>
           
           <TabsContent value="rankings">
-            <Card>
-              <CardHeader>
-                <CardTitle>Career Statistics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Player</TableHead>
-                      <TableHead>Weeks at #1</TableHead>
-                      <TableHead>Year-End #1 Finishes</TableHead>
-                      <TableHead>Win Rate</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {tennisPlayers.map((player) => {
-                      const yearEndNo1Count = playerStats[player.id].yearEndRanking.filter(rank => rank === 1).length;
-                      
-                      return (
-                        <TableRow key={player.id}>
-                          <TableCell className="font-medium">{player.fullName}</TableCell>
-                          <TableCell>{player.weeksAtNumberOne}</TableCell>
-                          <TableCell>{yearEndNo1Count}</TableCell>
-                          <TableCell>{playerStats[player.id].matchWinRate}%</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <CareerStatsTab tennisPlayers={tennisPlayers} playerStats={playerStats} />
           </TabsContent>
         </Tabs>
 
