@@ -35,7 +35,7 @@ const TennisPoll = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold mb-2 text-tennis-blue">
+        <h1 className="text-4xl font-bold mb-2 text-red-500">
           Tennis G.O.A.T. Poll
         </h1>
         <p className="text-gray-600 text-lg">
