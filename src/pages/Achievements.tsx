@@ -23,34 +23,49 @@ import {
 import { tennisPlayers } from "@/data/tennisPlayers";
 import { Trophy, Award, Medal } from "lucide-react";
 
-// Additional career stats data
+// Updated career stats data based on Ultimate Tennis Statistics
 const playerStats = {
   "federer": {
     hardCourtWins: 783,
     clayCourtWins: 223,
     grassCourtWins: 192,
     totalWins: 1251,
-    olympicMedals: 2,
+    olympicMedals: 1,
     tourFinals: 6,
-    yearEndRanking: [2, 1, 1, 1, 1, 2, 1, 2, 3, 3, 6, 2, 2, 3, 16, 3]
+    yearEndRanking: [6, 13, 6, 2, 1, 1, 1, 1, 1, 2, 3, 3, 2, 2, 3, 16, 3],
+    matchWinRate: 82.1,
+    hardCourtTitles: 71,
+    clayCourtTitles: 11,
+    grassCourtTitles: 19,
+    masters1000: 28
   },
   "nadal": {
-    hardCourtWins: 495,
+    hardCourtWins: 519,
     clayCourtWins: 474,
-    grassCourtWins: 71,
-    totalWins: 1068,
+    grassCourtWins: 78,
+    totalWins: 1076,
     olympicMedals: 2,
     tourFinals: 0,
-    yearEndRanking: [47, 2, 2, 2, 1, 2, 1, 2, 1, 3, 5, 9, 1, 2, 2, 6]
+    yearEndRanking: [47, 2, 2, 2, 1, 2, 1, 2, 1, 3, 5, 9, 1, 2, 2, 6, 9],
+    matchWinRate: 83.2,
+    hardCourtTitles: 25,
+    clayCourtTitles: 63,
+    grassCourtTitles: 4,
+    masters1000: 36
   },
   "djokovic": {
-    hardCourtWins: 693,
-    clayCourtWins: 259,
-    grassCourtWins: 112,
-    totalWins: 1079,
+    hardCourtWins: 700,
+    clayCourtWins: 268,
+    grassCourtWins: 121,
+    totalWins: 1094,
     olympicMedals: 1,
     tourFinals: 7,
-    yearEndRanking: [16, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 12, 1, 1, 1, 1]
+    yearEndRanking: [83, 16, 3, 2, 3, 1, 1, 2, 1, 1, 1, 2, 12, 1, 1, 1, 1],
+    matchWinRate: 83.4,
+    hardCourtTitles: 69,
+    clayCourtTitles: 18,
+    grassCourtTitles: 8,
+    masters1000: 40
   }
 };
 
@@ -70,7 +85,7 @@ const Achievements = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mb-8">
-          <TabsList className="grid grid-cols-3 mb-6">
+          <TabsList className="grid grid-cols-4 mb-6">
             <TabsTrigger value="general" className="flex items-center gap-2">
               <Trophy className="h-4 w-4" />
               Major Titles
@@ -78,6 +93,10 @@ const Achievements = () => {
             <TabsTrigger value="surfaces" className="flex items-center gap-2">
               <Medal className="h-4 w-4" />
               Wins by Surface
+            </TabsTrigger>
+            <TabsTrigger value="titles" className="flex items-center gap-2">
+              <Trophy className="h-4 w-4" />
+              Titles Breakdown
             </TabsTrigger>
             <TabsTrigger value="rankings" className="flex items-center gap-2">
               <Award className="h-4 w-4" />
@@ -149,6 +168,38 @@ const Achievements = () => {
             </Card>
           </TabsContent>
           
+          <TabsContent value="titles">
+            <Card>
+              <CardHeader>
+                <CardTitle>Titles by Surface & Category</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Player</TableHead>
+                      <TableHead>Hard Court Titles</TableHead>
+                      <TableHead>Clay Court Titles</TableHead>
+                      <TableHead>Grass Court Titles</TableHead>
+                      <TableHead>Masters 1000</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {tennisPlayers.map((player) => (
+                      <TableRow key={player.id}>
+                        <TableCell className="font-medium">{player.fullName}</TableCell>
+                        <TableCell>{playerStats[player.id].hardCourtTitles}</TableCell>
+                        <TableCell>{playerStats[player.id].clayCourtTitles}</TableCell>
+                        <TableCell>{playerStats[player.id].grassCourtTitles}</TableCell>
+                        <TableCell>{playerStats[player.id].masters1000}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
           <TabsContent value="rankings">
             <Card>
               <CardHeader>
@@ -167,14 +218,13 @@ const Achievements = () => {
                   <TableBody>
                     {tennisPlayers.map((player) => {
                       const yearEndNo1Count = playerStats[player.id].yearEndRanking.filter(rank => rank === 1).length;
-                      const winRate = ((playerStats[player.id].totalWins / (playerStats[player.id].totalWins + 220)) * 100).toFixed(1);
                       
                       return (
                         <TableRow key={player.id}>
                           <TableCell className="font-medium">{player.fullName}</TableCell>
                           <TableCell>{player.weeksAtNumberOne}</TableCell>
                           <TableCell>{yearEndNo1Count}</TableCell>
-                          <TableCell>{winRate}%</TableCell>
+                          <TableCell>{playerStats[player.id].matchWinRate}%</TableCell>
                         </TableRow>
                       );
                     })}
