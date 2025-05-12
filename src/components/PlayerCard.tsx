@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { TennisPlayer } from "@/data/tennisPlayers";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Tennis } from "lucide-react";
 
 interface PlayerCardProps {
   player: TennisPlayer;
@@ -26,8 +27,8 @@ const PlayerCard = ({ player, isSelected, onClick }: PlayerCardProps) => {
       <CardContent className="p-4 flex flex-col items-center">
         <Avatar className="w-24 h-24 mb-3">
           <AvatarImage src={player.image} alt={player.fullName} className="object-cover" />
-          <AvatarFallback className="text-3xl font-bold text-gray-500">
-            {player.name.charAt(0)}
+          <AvatarFallback className="text-3xl font-bold text-gray-500 bg-tennis-green/20">
+            <Tennis className="w-12 h-12 text-tennis-blue" />
           </AvatarFallback>
         </Avatar>
         
