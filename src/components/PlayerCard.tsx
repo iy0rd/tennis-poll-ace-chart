@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TennisPlayer } from "@/data/tennisPlayers";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface PlayerCardProps {
   player: TennisPlayer;
@@ -23,10 +24,13 @@ const PlayerCard = ({ player, isSelected, onClick }: PlayerCardProps) => {
       onClick={onClick}
     >
       <CardContent className="p-4 flex flex-col items-center">
-        <div className="w-24 h-24 rounded-full bg-gray-200 mb-3 overflow-hidden flex items-center justify-center">
-          {/* In a real app, you'd use a real image here */}
-          <div className="text-3xl font-bold text-gray-500">{player.name.charAt(0)}</div>
-        </div>
+        <Avatar className="w-24 h-24 mb-3">
+          <AvatarImage src={player.image} alt={player.fullName} className="object-cover" />
+          <AvatarFallback className="text-3xl font-bold text-gray-500">
+            {player.name.charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        
         <h3 className="font-bold text-xl mb-1">{player.fullName}</h3>
         <p className="text-sm text-gray-500 mb-2">{player.country}</p>
         
