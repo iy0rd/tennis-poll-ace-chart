@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-red-500 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-white via-tennis-blue/30 to-tennis-green/40 py-12 px-4">
       <TennisPoll />
       
       <div className="max-w-4xl mx-auto mt-12 text-center">
